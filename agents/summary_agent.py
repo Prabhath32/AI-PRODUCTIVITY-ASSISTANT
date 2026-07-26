@@ -1,36 +1,34 @@
 from config import llm
 
 
-def summary_agent(meetings, notes, documents, emails):
+def summary_node(state):
 
     prompt = f"""
-    You are an AI Productivity Assistant.
-
-    Prepare a meeting preparation report.
+    Prepare a meeting report.
 
     Meetings:
-    {meetings}
+    {state.meetings}
 
     Notes:
-    {notes}
+    {state.notes}
 
     Documents:
-    {documents}
+    {state.documents}
 
     Emails:
-    {emails}
+    {state.emails}
 
-    Generate:
+    Include:
 
-    1. Meeting Summary
+    Meeting Summary
 
-    2. Important Discussion Points
+    Discussion Points
 
-    3. Things To Remember
-
-    4. Checklist
+    Checklist
     """
 
     response = llm.invoke(prompt)
 
-    return response.content
+    state.final_report = response.content
+
+    return state

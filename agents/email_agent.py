@@ -1,8 +1,8 @@
 from mcp_tools.email_tools import search_emails
 
 
-def email_agent():
+def email_node(state):
 
-    emails = search_emails()
+    state.emails = search_emails()
 
-    return emails
+    return state

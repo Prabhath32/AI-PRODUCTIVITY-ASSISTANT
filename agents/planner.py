@@ -1,23 +1,21 @@
+from state import AssistantState
 from config import llm
 
 
-def planner_agent(user_query: str):
+def planner_node(state: AssistantState):
 
     prompt = f"""
-    You are a planning agent.
-
     User request:
-    {user_query}
+    {state.user_query}
 
-    Decide which information is required.
+    Decide required information.
 
-    Return ONLY a comma-separated list using these names:
-    calendar, notes, documents, emails
-
-    Example:
+    Return only:
     calendar,notes,documents,emails
     """
 
     response = llm.invoke(prompt)
 
-    return response.content.strip().lower()
+    state.plan = response.content.strip().lower()
+
+    return state

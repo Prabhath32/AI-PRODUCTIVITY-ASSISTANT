@@ -1,8 +1,8 @@
 from mcp_tools.document_tools import search_documents
 
 
-def document_agent():
+def document_node(state):
 
-    docs = search_documents()
+    state.documents = search_documents()
 
-    return docs
+    return state
